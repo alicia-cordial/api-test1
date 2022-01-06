@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ExperienceRepository;
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      itemOperations={
  *          "get",
  *          "put"={"security"="is_granted('edit', object)"},
- *         "delete"={"security"="is_granted('delete', object)"}
+ *          "delete"={"security"="is_granted('delete', object)"}
  *     }
  * )
  * @ORM\Entity(repositoryClass=ExperienceRepository::class)
@@ -113,10 +114,18 @@ class Experience
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="experience")
+     * 
+     * @Groups({"experience:read"})
+     */
+    private $reviews;
+
     public function __construct()
     {
         $this->archive = false;
         $this->created_at = new \DateTime('now');
+        $this->reviews = new ArrayCollection();
     }
 
 
@@ -253,6 +262,36 @@ class Experience
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setExperience($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getExperience() === $this) {
+                $review->setExperience(null);
+            }
+        }
 
         return $this;
     }
