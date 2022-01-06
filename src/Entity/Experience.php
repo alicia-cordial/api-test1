@@ -5,13 +5,23 @@ namespace App\Entity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ExperienceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource(
  *      normalizationContext={"groups"={"experience:read"}},
- *      denormalizationContext={"groups"={"experience:write"}}
+ *      denormalizationContext={"groups"={"experience:write"}},
+ *      collectionOperations={
+ *          "get",
+ *          "post"={"security"="is_granted('ROLE_USER')"}
+ *      },
  * 
+ *      itemOperations={
+ *          "get",
+ *          "put"={"security"="is_granted('edit', object)"},
+ *         "delete"={"security"="is_granted('delete', object)"}
+ *     }
  * )
  * @ORM\Entity(repositoryClass=ExperienceRepository::class)
  */
@@ -48,7 +58,7 @@ class Experience
     private $image;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      * 
      * @Groups({"experience:read", "experience:write", "user:read"})
      */
@@ -99,14 +109,14 @@ class Experience
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="experiences")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"experience:write", "experience:read"})
+     * @Groups({"experience:read", "experience:write"})
      */
     private $user;
 
     public function __construct()
     {
         $this->archive = false;
-        $this->createdAt = new \DateTime();
+        $this->created_at = new \DateTime('now');
     }
 
 
@@ -246,4 +256,6 @@ class Experience
 
         return $this;
     }
+
+
 }

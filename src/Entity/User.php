@@ -86,6 +86,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $status;
 
     /**
+     * @ORM\Column(type="datetime")
+     * 
+     * @Groups({"user:read"})
+     */
+    private $created_at;
+
+
+    /**
      * @Groups("user:write")
      * 
      * @SerializedName("password")
@@ -93,11 +101,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $plainPassword;
 
     /**
-     * @ORM\OneToMany(targetEntity=Experience::class, mappedBy="user", orphanRemoval=true)
-     * 
-     * @Groups("user:read")
+     * @ORM\OneToMany(targetEntity=Experience::class, mappedBy="User", orphanRemoval=true)
+     * @Groups({"user:read"})
      */
     private $experiences;
+
+   
 
     public function __construct()
     {
@@ -117,6 +126,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLogin(string $login): self
     {
         $this->login = $login;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTime $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -158,6 +179,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function hasRoles(string $roles): bool
+    {
+        return in_array($roles, $this->roles);
+    }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -190,7 +216,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getFirstname(): ?string
@@ -294,4 +320,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+   
 }
