@@ -121,11 +121,19 @@ class Experience
      */
     private $reviews;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Interest::class, mappedBy="experience", orphanRemoval=true)
+     * 
+     * @Groups({"experience:read"})
+     */
+    private $interests;
+
     public function __construct()
     {
         $this->archive = false;
         $this->created_at = new \DateTime('now');
         $this->reviews = new ArrayCollection();
+        $this->interests = new ArrayCollection();
     }
 
 
@@ -290,6 +298,36 @@ class Experience
             // set the owning side to null (unless already changed)
             if ($review->getExperience() === $this) {
                 $review->setExperience(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Interest[]
+     */
+    public function getInterests(): Collection
+    {
+        return $this->interests;
+    }
+
+    public function addInterest(Interest $interest): self
+    {
+        if (!$this->interests->contains($interest)) {
+            $this->interests[] = $interest;
+            $interest->setExperience($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInterest(Interest $interest): self
+    {
+        if ($this->interests->removeElement($interest)) {
+            // set the owning side to null (unless already changed)
+            if ($interest->getExperience() === $this) {
+                $interest->setExperience(null);
             }
         }
 

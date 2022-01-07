@@ -102,15 +102,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Experience::class, mappedBy="user", orphanRemoval=true)
+     * 
      * @Groups({"user:read"})
      */
     private $experiences;
 
     /**
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="user", orphanRemoval=true)
+     * 
      * @Groups({"user:read"})
      */
     private $reviews;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Interest::class, mappedBy="user", orphanRemoval=true)
+     * 
+     * @Groups({"user:read"})
+     */
+    private $interests;
 
    
 
@@ -118,6 +127,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->experiences = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->interests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -352,6 +362,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($review->getUser() === $this) {
                 $review->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Interest[]
+     */
+    public function getInterests(): Collection
+    {
+        return $this->interests;
+    }
+
+    public function addInterest(Interest $interest): self
+    {
+        if (!$this->interests->contains($interest)) {
+            $this->interests[] = $interest;
+            $interest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInterest(Interest $interest): self
+    {
+        if ($this->interests->removeElement($interest)) {
+            // set the owning side to null (unless already changed)
+            if ($interest->getUser() === $this) {
+                $interest->setUser(null);
             }
         }
 
