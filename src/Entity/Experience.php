@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -73,16 +73,16 @@ class Experience
     private $location;
 
     /**
-     * @ORM\Column(type="integer")
-     * 
+     * @var string Property viewable and writable only by users with ROLE_ADMIN
      * @Groups({"experience:read", "experience:write", "user:read"})
-     */
+      */
+     #[ApiProperty(security: "is_granted('ROLE_VERIFIED')")]
     private $spots;
 
     /**
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"experience:read", "experience:write", "user:read"})
+     * @Groups({"experience:write", "experience:read"})
      */
     private $duration;
 

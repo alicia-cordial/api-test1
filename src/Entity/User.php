@@ -17,7 +17,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * 
  * @ApiResource(
  *     normalizationContext={"groups"={"user:read"}},
- *     denormalizationContext={"groups"={"user:write"}})
+ *     denormalizationContext={"groups"={"user:write"}}
+ * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -185,6 +186,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        // $roles[] = 'ROLE_VERIFIED';
 
         return array_unique($roles);
     }
