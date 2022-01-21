@@ -67,9 +67,10 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         //set the createdAt value if it's a POST request
         if ($this->_request->getMethod() == 'POST') {
             $data->setCreatedAt(new \DateTime());
+            $data->setRoles(['ROLE_USER']);
         }
 
-        // Set the updatedAt value if it's not a POST request
+      
         // if ($this->_request->getMethod() !== 'POST') {
          
         // }

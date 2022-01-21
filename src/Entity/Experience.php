@@ -73,10 +73,10 @@ class Experience
     private $location;
 
     /**
-     * @var string Property viewable and writable only by users with ROLE_ADMIN
+     * @ORM\Column(type="integer") 
      * @Groups({"experience:read", "experience:write", "user:read"})
       */
-     #[ApiProperty(security: "is_granted('ROLE_VERIFIED')")]
+     #[ApiProperty(security: "is_granted('ROLE_USER')")]
     private $spots;
 
     /**
@@ -89,14 +89,14 @@ class Experience
     /**
      * @ORM\Column(type="boolean")
      * 
-     * @Groups({"experience:read", "experience:write", "user:read"})
+     * @Groups({"experience:read", "user:read"})
      */
     private $visible;
 
     /**
      * @ORM\Column(type="boolean")
      * 
-     * @Groups({"experience:read", "experience:write", "user:read"})
+     * @Groups({"experience:read", "user:read"})
      */
     private $archive;
 
@@ -110,7 +110,7 @@ class Experience
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="experiences")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"experience:read", "experience:write"})
+     * @Groups({"experience:read"})
      */
     private $user;
 

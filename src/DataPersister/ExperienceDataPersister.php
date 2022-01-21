@@ -53,10 +53,12 @@ class ExperienceDataPersister implements ContextAwareDataPersisterInterface
      */
     public function persist($data, array $context = [])
     {
-        //set the createdAt value if it's a POST request
+        //set default values if it's a POST request
         if ($this->_request->getMethod() == 'POST') {
             $data->setCreatedAt(new \DateTime());
             $data->setUser($this->_security->getUser());
+            $data->setArchive(false);
+            $data->setVisible(true);
         }
 
         // Set the updatedAt value if it's not a POST request

@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups("user:read")
+     * @Groups("user:read", "experience:read")
      */
     private $id;
 
@@ -79,12 +79,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $telephone;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * 
-     * @Groups({"user:read", "user:write"})
-     */
-    private $status;
 
     /**
      * @ORM\Column(type="datetime")
@@ -184,8 +178,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
         // $roles[] = 'ROLE_VERIFIED';
 
         return array_unique($roles);
@@ -286,17 +278,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
 
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
 
     public function getPlainPassword(): ?string
     {
