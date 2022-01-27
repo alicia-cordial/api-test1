@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups("user:read", "experience:read")
+     * @Groups({"user:read", "experience:read"})
      */
     private $id;
 
@@ -56,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user:read"})
      */
     private $firstname;
 
@@ -76,6 +76,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * 
+     * @Groups({"user:read", "user:write", "experience:read"})
      */
     private $telephone;
 

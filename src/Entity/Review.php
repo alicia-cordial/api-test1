@@ -8,7 +8,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ReviewRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
+use ApiPlatform\Core\Annotation\ApiProperty;
 /**
  * @ApiResource(
  *      normalizationContext={"groups"={"review:read"}},
@@ -32,27 +32,27 @@ class Review
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"review:read", "experience:read"})
+     * @Groups({"review:read", "experience:read", "user:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"review:read", "review:write", "experience:read"})
+     * @Groups({"review:read", "review:write", "experience:read", "user:read"})
      */
     private $message;
 
     /**
      * @ORM\Column(type="datetime")
      * 
-     * @Groups({"review:read", "experience:read"})
+     * @Groups({"review:read", "experience:read", "user:read"})
      */
     private $date;
 
     /**
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"review:read", "review:write", "experience:read"})
+     * @Groups({"review:read", "review:write", "experience:read", "user:read"})
      */
     private $rating;
 
@@ -67,8 +67,8 @@ class Review
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reviews")
      * @ORM\JoinColumn(nullable=false)
-     * 
-     * @Groups({"review:read", "review:write", "experience:read"})
+     * @Groups({"review:read", "review:write", "experience:read", "user:read"})
+     * @ApiProperty(readableLink=false)
      */
     private $user;
 

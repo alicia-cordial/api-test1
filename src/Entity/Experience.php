@@ -117,7 +117,7 @@ class Experience
     /**
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="experience")
      * 
-     * @Groups({"experience:read"})
+     * @Groups({"experience:read", "user:read"})
      */
     private $reviews;
 
