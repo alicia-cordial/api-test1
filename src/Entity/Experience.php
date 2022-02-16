@@ -8,9 +8,12 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ExperienceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiResource(
+ *      attributes={"order"={"created_at": "DESC"}},
  *      normalizationContext={"groups"={"experience:read"}},
  *      denormalizationContext={"groups"={"experience:write"}},
  *      collectionOperations={
@@ -24,6 +27,7 @@ use Doctrine\ORM\Mapping as ORM;
  *          "delete"={"security"="is_granted('delete', object)"}
  *     }
  * )
+ * 
  * @ORM\Entity(repositoryClass=ExperienceRepository::class)
  */
 class Experience
@@ -67,7 +71,7 @@ class Experience
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     * @ApiFilter(SearchFilter::class, strategy="partial")
      * @Groups({"experience:read", "experience:write", "user:read"})
      */
     private $location;
