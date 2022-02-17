@@ -67,7 +67,7 @@ class Interest
      * @ORM\ManyToOne(targetEntity=Experience::class, inversedBy="interests")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Groups({"interest:read", "interest:write", "user:read"})
+     * @Groups({"interest:read", "interest:write"})
      */
     private $experience;
 

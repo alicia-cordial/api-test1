@@ -27,7 +27,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          "delete"={"security"="is_granted('delete', object)"}
  *     }
  * )
- * 
+ * @ApiFilter(SearchFilter::class, properties={"title" = "partial", "content" = "ipartial"})
  * @ORM\Entity(repositoryClass=ExperienceRepository::class)
  */
 class Experience
