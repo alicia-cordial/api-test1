@@ -7,7 +7,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\InterestRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use ApiPlatform\Core\Annotation\ApiProperty;
 /**
  * @ApiResource(
  *      normalizationContext={"groups"={"interest:read"}},
@@ -58,7 +58,8 @@ class Interest
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="interests")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Groups({"interest:read", "interest:write", "experience:read"})
+     * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
+     * @ApiProperty(readableLink=false)
      */
     private $user;
 

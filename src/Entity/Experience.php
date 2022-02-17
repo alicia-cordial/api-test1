@@ -128,7 +128,7 @@ class Experience
     /**
      * @ORM\OneToMany(targetEntity=Interest::class, mappedBy="experience", orphanRemoval=true)
      * 
-     * @Groups({"experience:read"})
+     * @Groups({"experience:read", "user:read"})
      */
     private $interests;
 
