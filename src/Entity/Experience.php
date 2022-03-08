@@ -44,14 +44,14 @@ class Experience
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"experience:read", "experience:write", "user:read"})
+     * @Groups({"experience:read", "experience:write", "interest:read", "user:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * 
-     * @Groups({"experience:read", "experience:write", "user:read"})
+     * @Groups({"experience:read", "experience:write", "interest:read", "user:read"})
      */
     private $content;
 
@@ -65,14 +65,14 @@ class Experience
     /**
      * @ORM\Column(type="datetime")
      * 
-     * @Groups({"experience:read", "experience:write", "user:read"})
+     * @Groups({"experience:read", "experience:write", "interest:read", "user:read"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @ApiFilter(SearchFilter::class, strategy="partial")
-     * @Groups({"experience:read", "experience:write", "user:read"})
+     * @Groups({"experience:read", "experience:write", "interest:read",  "user:read"})
      */
     private $location;
 

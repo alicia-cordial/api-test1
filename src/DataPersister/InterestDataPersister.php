@@ -53,9 +53,11 @@ class InterestDataPersister implements ContextAwareDataPersisterInterface
      */
     public function persist($data, array $context = [])
     {
-        //set the createdAt value if it's a POST request
+        //set default values if it's a POST request
         if ($this->_request->getMethod() == 'POST') {
             $data->setDate(new \DateTime());
+            $data->setUser($this->_security->getUser());
+            $data->setAccepted(false);
         }
 
         $this->_entityManager->persist($data);

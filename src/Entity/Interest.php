@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiProperty;
 /**
  * @ApiResource(
+ * 
  *      normalizationContext={"groups"={"interest:read"}},
  *      denormalizationContext={"groups"={"interest:write"}},
  *      )
@@ -67,7 +68,8 @@ class Interest
      * @ORM\ManyToOne(targetEntity=Experience::class, inversedBy="interests")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Groups({"interest:read", "interest:write"})
+     * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
+     * @ApiProperty(readableLink=false)
      */
     private $experience;
 
