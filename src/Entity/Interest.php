@@ -59,8 +59,9 @@ class Interest
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="interests")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
-     * @ApiProperty(readableLink=false)
+     * @Groups({"interest:read", "interest:write", "experience:read"})
+     * 
+     * 
      */
     private $user;
 
@@ -68,8 +69,8 @@ class Interest
      * @ORM\ManyToOne(targetEntity=Experience::class, inversedBy="interests")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
-     * @ApiProperty(readableLink=false)
+     * @Groups({"interest:read", "interest:write", "user:read"})
+     * 
      */
     private $experience;
 

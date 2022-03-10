@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 /**
  * @ApiResource(
  *      attributes={"order"={"created_at": "DESC"}},
@@ -28,6 +28,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     }
  * )
  * @ApiFilter(SearchFilter::class, properties={"title" = "partial", "content" = "ipartial"})
+ * @ApiFilter(BooleanFilter::class, properties={"archive", "visible"})
  * @ORM\Entity(repositoryClass=ExperienceRepository::class)
  */
 class Experience

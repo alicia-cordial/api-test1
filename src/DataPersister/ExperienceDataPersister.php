@@ -59,6 +59,9 @@ class ExperienceDataPersister implements ContextAwareDataPersisterInterface
             $data->setUser($this->_security->getUser());
             $data->setArchive(false);
             $data->setVisible(true);
+            if(!isset($data->getImage)) {
+                $data->setImage('exemple_ville.jpeg');
+            }
         }
 
         // Set the updatedAt value if it's not a POST request
