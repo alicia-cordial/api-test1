@@ -16,11 +16,11 @@ class JWTCreatedListener
             $user = $event->getUser();
             /** @var \App\Entity\User $user */
             $userId = $user->getId();
-            $userUri = '/api/users/' . $userId;
+            $userIri = '/api/users/' . $userId;
 
             $payload = $event->getData();
             $payload['id'] = $userId;
-            $payload['userUri'] = $userUri;
+            $payload['userIri'] = $userIri;
 
             $event->setData($payload);
             $header        = $event->getHeader();
