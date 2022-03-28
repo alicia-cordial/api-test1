@@ -94,14 +94,14 @@ class Experience
     /**
      * @ORM\Column(type="boolean")
      * 
-     * @Groups({"experience:read", "user:read"})
+     * @Groups({"experience:read", "user:read", "user:write"})
      */
     private $visible;
 
     /**
      * @ORM\Column(type="boolean")
      * 
-     * @Groups({"experience:read", "user:read"})
+     * @Groups({"experience:read", "user:read", "user:write"})
      */
     private $archive;
 

@@ -42,7 +42,7 @@ class Interest
     private $plan;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * 
      * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
      */
