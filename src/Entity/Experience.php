@@ -23,7 +23,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  * 
  *      itemOperations={
  *          "get",
- *          "put"={"security"="is_granted('edit', object)"},
+ *          "patch"={"security"="is_granted('edit', object)"},
  *          "delete"={"security"="is_granted('delete', object)"}
  *     }
  * )
@@ -94,14 +94,14 @@ class Experience
     /**
      * @ORM\Column(type="boolean")
      * 
-     * @Groups({"experience:read", "user:read", "user:write"})
+     * @Groups({"experience:read", "experience:write", "user:read", "user:write"})
      */
     private $visible;
 
     /**
      * @ORM\Column(type="boolean")
      * 
-     * @Groups({"experience:read", "user:read", "user:write"})
+     * @Groups({"experience:read", "experience:write", "user:read", "user:write"})
      */
     private $archive;
 

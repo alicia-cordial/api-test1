@@ -51,7 +51,7 @@ class Interest
     /**
      * @ORM\Column(type="datetime")
      * 
-     * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
+     * @Groups({"interest:read", "experience:read", "user:read"})
      */
     private $date;
 
@@ -59,7 +59,7 @@ class Interest
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="interests")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
+     * @Groups({"interest:read", "experience:read", "user:read"})
      * @ApiProperty(readableLink=false)
      * 
      */
