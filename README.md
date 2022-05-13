@@ -5,9 +5,12 @@ You need to have symfony, npm and a WAMP/MAMP/XAMP environnement.
 ## Before launching
 
 Start your mamp/wamp.
+
 Install all dependencies with
 
     npm install
+
+    composer install
 
 Copy .env to .env.local
 
@@ -34,13 +37,22 @@ Create and make migration
     localhost:8000/api
 
 
+## Troubleshooting
+
+Don't forget to start your server.
+If you can't reach the port, try:
+
+    symfony server:stop
+    
+and start again.
+
 ## Get token
 
 Create directory for token
 
     mkdir config/jwt
 
-Use openssl to generate private key
+Use openssl to generate private key. You'll need to use a bash terminal.
 
      openssl genrsa -out config/jwt/private.pem -aes256 4096
 
