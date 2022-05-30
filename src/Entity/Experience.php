@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+
 use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+
 /**
  * @ApiResource(
  *      attributes={"order"={"created_at": "DESC"}},
@@ -57,7 +59,7 @@ class Experience
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      * 
      * @Groups({"experience:read", "experience:write", "user:read"})
      */
@@ -80,8 +82,8 @@ class Experience
     /**
      * @ORM\Column(type="integer") 
      * @Groups({"experience:read", "experience:write", "user:read"})
-      */
-     #[ApiProperty(security: "is_granted('ROLE_USER')")]
+     */
+    #[ApiProperty(security: "is_granted('ROLE_USER')")]
     private $spots;
 
     /**
@@ -338,6 +340,4 @@ class Experience
 
         return $this;
     }
-
-
 }
