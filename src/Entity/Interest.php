@@ -35,14 +35,14 @@ class Interest
     private $message;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer")
      * 
      * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
      */
     private $plan;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="integer")
      * 
      * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
      */
@@ -108,7 +108,7 @@ class Interest
         return $this->accepted;
     }
 
-    public function setAccepted(bool $accepted): self
+    public function setAccepted(?int $accepted): self
     {
         $this->accepted = $accepted;
 

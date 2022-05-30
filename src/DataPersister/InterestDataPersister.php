@@ -55,6 +55,7 @@ class InterestDataPersister implements ContextAwareDataPersisterInterface
     {
         //set default values if it's a POST request
         if ($this->_request->getMethod() == 'POST') {
+            $data->setAccepted(0);
             $data->setDate(new \DateTime());
             $data->setUser($this->_security->getUser());
             if($data->getPlan() == false) {
