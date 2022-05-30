@@ -39,6 +39,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $login;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * 
+     * @Groups({"user:read", "user:write", "experience:read"})
+     */
+    private $biography;
+
+    /**
      * @ORM\Column(type="json")
      * 
      * @Groups("user:read")
@@ -140,6 +147,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLogin(string $login): self
     {
         $this->login = $login;
+
+        return $this;
+    }
+
+    public function getBiography(): ?string
+    {
+        return $this->biography;
+    }
+
+    public function setBiography(?string $biography): self
+    {
+        $this->biography = $biography;
 
         return $this;
     }

@@ -35,6 +35,13 @@ class Interest
     private $message;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * 
+     * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
+     */
+    private $title;
+
+    /**
      * @ORM\Column(type="boolean")
      * 
      * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
@@ -87,6 +94,18 @@ class Interest
     public function setMessage(?string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }
