@@ -68,6 +68,9 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         if ($this->_request->getMethod() == 'POST') {
             $data->setCreatedAt(new \DateTime());
             $data->setRoles(['ROLE_USER']);
+            if(!($data->getAvatar())) {
+                $data->setAvatar('default-avatar.png');
+            }
         }
 
       
