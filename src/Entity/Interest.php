@@ -35,7 +35,7 @@ class Interest
     private $message;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      * 
      * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
      */
