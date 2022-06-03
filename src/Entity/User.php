@@ -126,7 +126,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $interests;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      * 
      *  @Groups({"user:read", "user:write", "experience:read"})
      */
