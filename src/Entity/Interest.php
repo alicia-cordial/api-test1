@@ -122,7 +122,7 @@ class Interest
         return $this;
     }
 
-    public function getAccepted(): ?bool
+    public function getAccepted(): ?int
     {
         return $this->accepted;
     }
