@@ -81,20 +81,6 @@ class Interest
      */
     private $experience;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * 
-     * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
-     */
-    private $login;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * 
-     * @Groups({"interest:read", "interest:write", "experience:read", "user:read"})
-     */
-    private $telephone;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -180,30 +166,6 @@ class Interest
     public function setExperience(?Experience $experience): self
     {
         $this->experience = $experience;
-
-        return $this;
-    }
-
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    public function setLogin(?string $login): self
-    {
-        $this->login = $login;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?int
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(?int $telephone): self
-    {
-        $this->telephone = $telephone;
 
         return $this;
     }
